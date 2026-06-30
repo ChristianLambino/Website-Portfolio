@@ -14,20 +14,20 @@ from pathlib import Path
 import os
 import dj_database_url
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}",
-        conn_max_age=600
-    )
-}
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 # Turn off debug mode on Render automatically
 DEBUG = 'RENDER' not in os.environ
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-fallback-local-dev-key')
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+DATABASES = {
+    'default': dj_database_url.config(
+        default=f"sqlite:///{os.path.join(BASE_DIR, 'db.sqlite3')}",
+        conn_max_age=600
+    )
+}
 
 
 # Quick-start development settings - unsuitable for production
@@ -94,12 +94,6 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
